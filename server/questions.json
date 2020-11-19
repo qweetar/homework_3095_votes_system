@@ -1,0 +1,5 @@
+[
+    {"question": "react", "code": 1},
+    {"question": "angular", "code": 2},
+    {"question": "vue", "code": 3}
+]
