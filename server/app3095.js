@@ -29,6 +29,9 @@ const port = 3095;
 
 let votes;
 
+webserver.get('/', function(req, res) {
+    res.sendFile('/client/index.html');
+});
 
 webserver.get('/stat', function(req, res) {
     votes = require('./votes.json');

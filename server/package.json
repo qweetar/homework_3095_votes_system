@@ -14,7 +14,7 @@
     "url": "https://github.com/qweetar/homework_3095_votes_system.git"
   },
   "keywords": [],
-  "author": "Loktev Alexey",
+  "author": "Sergey",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.6.0",
