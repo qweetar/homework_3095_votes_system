@@ -77,19 +77,19 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/server/views";
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./App.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./client/App.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./App.js":
-/*!****************!*\
-  !*** ./App.js ***!
-  \****************/
+/***/ "./client/App.js":
+/*!***********************!*\
+  !*** ./client/App.js ***!
+  \***********************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -105,7 +105,7 @@ var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/i
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _VotesBlock = __webpack_require__(/*! ./components/VotesBlock */ "./components/VotesBlock.js");
+var _VotesBlock = __webpack_require__(/*! ./components/VotesBlock */ "./client/components/VotesBlock.js");
 
 var _VotesBlock2 = _interopRequireDefault(_VotesBlock);
 
@@ -115,10 +115,10 @@ _reactDom2.default.render(_react2.default.createElement(_VotesBlock2.default, nu
 
 /***/ }),
 
-/***/ "./components/Question.js":
-/*!********************************!*\
-  !*** ./components/Question.js ***!
-  \********************************/
+/***/ "./client/components/Question.js":
+/*!***************************************!*\
+  !*** ./client/components/Question.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -151,9 +151,20 @@ var Question = function (_React$PureComponent) {
     _inherits(Question, _React$PureComponent);
 
     function Question() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, Question);
 
-        return _possibleConstructorReturn(this, (Question.__proto__ || Object.getPrototypeOf(Question)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Question.__proto__ || Object.getPrototypeOf(Question)).call.apply(_ref, [this].concat(args))), _this), _this.questionClicked = function (EO) {
+            console.log("user made the choice " + EO.target.value);
+            _this.props.cbHandleSubmit(_this.props.questions);
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Question, [{
@@ -162,7 +173,7 @@ var Question = function (_React$PureComponent) {
             return _react2.default.createElement(
                 'p',
                 null,
-                _react2.default.createElement('input', { name: 'vote', type: 'radio', value: this.props.questions.code }),
+                _react2.default.createElement('input', { onClick: this.questionClicked, name: 'vote', type: 'radio', value: this.props.questions.code }),
                 this.props.questions.question
             );
         }
@@ -175,16 +186,17 @@ Question.propTypes = {
     questions: _propTypes2.default.shape({
         code: _propTypes2.default.number.isRequired,
         question: _propTypes2.default.string.isRequired
-    })
+    }),
+    cbHandleSubmit: _propTypes2.default.func.isRequired
 };
 exports.default = Question;
 
 /***/ }),
 
-/***/ "./components/Votes.js":
-/*!*****************************!*\
-  !*** ./components/Votes.js ***!
-  \*****************************/
+/***/ "./client/components/Votes.js":
+/*!************************************!*\
+  !*** ./client/components/Votes.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -250,10 +262,10 @@ exports.default = Votes;
 
 /***/ }),
 
-/***/ "./components/VotesBlock.js":
-/*!**********************************!*\
-  !*** ./components/VotesBlock.js ***!
-  \**********************************/
+/***/ "./client/components/VotesBlock.js":
+/*!*****************************************!*\
+  !*** ./client/components/VotesBlock.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -274,11 +286,11 @@ var _isomorphicFetch = __webpack_require__(/*! isomorphic-fetch */ "./node_modul
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-var _Votes = __webpack_require__(/*! ./Votes */ "./components/Votes.js");
+var _Votes = __webpack_require__(/*! ./Votes */ "./client/components/Votes.js");
 
 var _Votes2 = _interopRequireDefault(_Votes);
 
-var _Question = __webpack_require__(/*! ./Question */ "./components/Question.js");
+var _Question = __webpack_require__(/*! ./Question */ "./client/components/Question.js");
 
 var _Question2 = _interopRequireDefault(_Question);
 
@@ -289,8 +301,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import { response } from "express";
 
 var VotesBlock = function (_React$PureComponent) {
   _inherits(VotesBlock, _React$PureComponent);
@@ -308,7 +318,7 @@ var VotesBlock = function (_React$PureComponent) {
     };
 
     _this.fetchError = function (errorMessage) {
-      console.error(errorMessage);
+      console.log(errorMessage);
     };
 
     _this.fetchSuccess = function (loadedData) {
@@ -320,7 +330,8 @@ var VotesBlock = function (_React$PureComponent) {
     };
 
     _this.loadData = function () {
-      (0, _isomorphicFetch2.default)("http://localhost:3095/stat", {
+      (0, _isomorphicFetch2.default)("http://46.101.125.193:3095/stat", {
+        // isoFetch("http://localhost:3095/stat", {
         method: "get",
         headers: {
           "Accept": "application/json"
@@ -346,8 +357,9 @@ var VotesBlock = function (_React$PureComponent) {
     };
 
     _this.loadQuestions = function () {
-      (0, _isomorphicFetch2.default)("http://localhost:3095/variants", {
-        method: "get",
+      (0, _isomorphicFetch2.default)("http://46.101.125.193:3095/variants", {
+        // isoFetch("http://localhost:3095/variants", {
+        method: "post",
         headers: {
           "Accept": "application/json"
         }
@@ -364,13 +376,28 @@ var VotesBlock = function (_React$PureComponent) {
       });
     };
 
-    _this.handleSubmit = function (event) {
-      event.preventDefauld();
-      console.log("Wow");
-      var data = new FormData(event.target);
-      (0, _isomorphicFetch2.default)("http://localhost:3095/vote", {
-        method: "POST",
-        body: data
+    _this.fetchSubminSuccess = function () {
+      _this.loadData();
+      _this.loadQuestions();
+    };
+
+    _this.handleSubmit = function (value) {
+      console.log(value);
+      (0, _isomorphicFetch2.default)("http://46.101.125.193:3095/vote", {
+        // isoFetch("http://localhost:3095/vote", {
+        method: "post",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(value)
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error("fetch error " + response.status);
+        } else {
+          _this.fetchSubminSuccess();
+        }
+      }).then(function (data) {}).catch(function (error) {
+        _this.fetchError(error.message);
       });
     };
 
@@ -386,6 +413,8 @@ var VotesBlock = function (_React$PureComponent) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       if (!this.state.dataReady) {
         return _react2.default.createElement(
           "div",
@@ -399,7 +428,11 @@ var VotesBlock = function (_React$PureComponent) {
       });
 
       var questionsCode = this.state.questions.map(function (question) {
-        return _react2.default.createElement(_Question2.default, { key: question.code, questions: question });
+        return _react2.default.createElement(_Question2.default, {
+          key: question.code,
+          questions: question,
+          cbHandleSubmit: _this2.handleSubmit
+        });
       });
 
       return _react2.default.createElement(
@@ -414,20 +447,11 @@ var VotesBlock = function (_React$PureComponent) {
           "div",
           null,
           _react2.default.createElement(
-            "form",
-            { onSubmit: this.handleSubmit },
-            _react2.default.createElement(
-              "h3",
-              null,
-              "\u041A\u0430\u043A\u043E\u0439 \u0444\u0440\u0435\u0439\u043C\u0432\u043E\u0440 JavaScript \u0412\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F?"
-            ),
-            questionsCode,
-            _react2.default.createElement(
-              "button",
-              null,
-              "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"
-            )
-          )
+            "h3",
+            null,
+            "\u041A\u0430\u043A\u043E\u0439 \u0444\u0440\u0435\u0439\u043C\u0432\u043E\u0440 JavaScript \u0412\u0430\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0432\u0441\u0435\u0433\u043E \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F?"
+          ),
+          questionsCode
         ),
         _react2.default.createElement(
           "div",

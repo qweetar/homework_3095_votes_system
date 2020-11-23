@@ -30,7 +30,7 @@ const port = 3095;
 let votes;
 
 webserver.get('/', function(req, res) {
-    res.sendFile('/client/index.html');
+    res.sendFile(__dirname + '/views/index.html');
 });
 
 webserver.get('/stat', function(req, res) {

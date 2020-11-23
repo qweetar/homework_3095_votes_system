@@ -1,10 +1,12 @@
 {
-  "name": "nodearch",
+  "name": "homework_3095",
   "version": "0.0.1",
   "description": "Node.js web projects architecture",
   "main": "app.js",
   "scripts": {
-    "server3095:dev": "cross-env NODE_ENV=development node app3095.js",
+    "build": ".\\node_modules\\.bin\\webpack",
+    "livebuild": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors",
+    "server3095:dev": "cross-env NODE_ENV=development node ./server/app3095.js",
     "server3095:prod": "cross-env NODE_ENV=production node app3095.js",
     "servers": "nodemon servers/servers.js",
     "servers_filelog": "node servers/servers.js >> /home/nodeuser/NodeArch/_nodemon.log"
@@ -17,22 +19,16 @@
   "author": "Sergey",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
-    "@babel/preset-react": "^7.6.3",
     "@babel/register": "^7.6.0",
-    "babel-preset-stage-0": "^6.24.1",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "connect-busboy": "0.0.2",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "cross-env": "^6.0.3",
-    "css-loader": "^3.6.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "hbs": "^4.1.1",
     "helmet": "^3.21.1",
     "ignore-styles": "^5.0.1",
@@ -52,9 +48,18 @@
     "react-dom": "^16.13.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "ws": "^7.1.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^3.6.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "ws": "^7.1.2"
+    "webpack-dev-server": "^3.11.0"
   }
 }
