@@ -25,7 +25,7 @@ webserver.use(express.static(path.join(__dirname + '/public')));
 
 webserver.use(cors());
 
-const port = 3095;
+const port = 3195;
 
 let votes;
 
