@@ -7,7 +7,7 @@
     "build": ".\\node_modules\\.bin\\webpack",
     "livebuild": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors",
     "server3095:dev": "cross-env NODE_ENV=development node ./server/app3095.js",
-    "server3095:prod": "cross-env NODE_ENV=production node app3095.js",
+    "server3095:prod": "cross-env NODE_ENV=production node ./server/app3095.js",
     "servers": "nodemon servers/servers.js",
     "servers_filelog": "node servers/servers.js >> /home/nodeuser/NodeArch/_nodemon.log"
   },
