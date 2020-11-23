@@ -330,8 +330,8 @@ var VotesBlock = function (_React$PureComponent) {
     };
 
     _this.loadData = function () {
-      (0, _isomorphicFetch2.default)("http://46.101.125.193:3095/stat", {
-        // isoFetch("http://localhost:3095/stat", {
+      // isoFetch("http://46.101.125.193:3195/stat", {
+      (0, _isomorphicFetch2.default)("http://localhost:3095/stat", {
         method: "get",
         headers: {
           "Accept": "application/json"
@@ -357,8 +357,8 @@ var VotesBlock = function (_React$PureComponent) {
     };
 
     _this.loadQuestions = function () {
-      (0, _isomorphicFetch2.default)("http://46.101.125.193:3095/variants", {
-        // isoFetch("http://localhost:3095/variants", {
+      // isoFetch("http://46.101.125.193:3195/variants", {
+      (0, _isomorphicFetch2.default)("http://localhost:3095/variants", {
         method: "post",
         headers: {
           "Accept": "application/json"
@@ -383,8 +383,8 @@ var VotesBlock = function (_React$PureComponent) {
 
     _this.handleSubmit = function (value) {
       console.log(value);
-      (0, _isomorphicFetch2.default)("http://46.101.125.193:3095/vote", {
-        // isoFetch("http://localhost:3095/vote", {
+      // isoFetch("http://46.101.125.193:3195/vote", {
+      (0, _isomorphicFetch2.default)("http://localhost:3095/vote", {
         method: "post",
         headers: {
           'Content-Type': 'application/json'
