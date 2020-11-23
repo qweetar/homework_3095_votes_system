@@ -33,7 +33,7 @@ class VotesBlock extends React.PureComponent {
   };
 
   loadData = () => {
-    isoFetch("http://46.101.125.193:3095/stat", {
+    isoFetch("http://46.101.125.193:3195/stat", {
     // isoFetch("http://localhost:3095/stat", {
       method: "get",
       headers: {
@@ -63,7 +63,7 @@ class VotesBlock extends React.PureComponent {
   };
 
   loadQuestions = () => {
-    isoFetch("http://46.101.125.193:3095/variants", {
+    isoFetch("http://46.101.125.193:3195/variants", {
     // isoFetch("http://localhost:3095/variants", {
       method: "post",
       headers: {
@@ -92,7 +92,7 @@ class VotesBlock extends React.PureComponent {
 
   handleSubmit = (value) => {
     console.log(value);
-    isoFetch("http://46.101.125.193:3095/vote", {
+    isoFetch("http://46.101.125.193:3195/vote", {
     // isoFetch("http://localhost:3095/vote", {
       method: "post",
       headers: {
