@@ -1,0 +1,17 @@
+[
+  {
+    "framework": "react",
+    "numVotes": 13,
+    "code": 1
+  },
+  {
+    "framework": "angular",
+    "numVotes": 15,
+    "code": 2
+  },
+  {
+    "framework": "vue",
+    "numVotes": 10,
+    "code": 3
+  }
+]

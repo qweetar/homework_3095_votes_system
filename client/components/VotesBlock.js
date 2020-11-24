@@ -33,8 +33,8 @@ class VotesBlock extends React.PureComponent {
   };
 
   loadData = () => {
-    // isoFetch("http://46.101.125.193:3195/stat", {
-    isoFetch("http://localhost:3095/stat", {
+    isoFetch("http://46.101.125.193:3195/stat", {
+    // isoFetch("http://localhost:3195/stat", {
       method: "get",
       headers: {
         "Accept": "application/json",
@@ -63,8 +63,8 @@ class VotesBlock extends React.PureComponent {
   };
 
   loadQuestions = () => {
-    // isoFetch("http://46.101.125.193:3195/variants", {
-    isoFetch("http://localhost:3095/variants", {
+    isoFetch("http://46.101.125.193:3195/variants", {
+    // isoFetch("http://localhost:3195/variants", {
       method: "post",
       headers: {
         "Accept": "application/json",
@@ -87,13 +87,12 @@ class VotesBlock extends React.PureComponent {
 
   fetchSubminSuccess = () => {
     this.loadData();
-    this.loadQuestions();
   }
 
   handleSubmit = (value) => {
     console.log(value);
-    // isoFetch("http://46.101.125.193:3195/vote", {
-    isoFetch("http://localhost:3095/vote", {
+    isoFetch("http://46.101.125.193:3195/vote", {
+    // isoFetch("http://localhost:3195/vote", {
       method: "post",
       headers: {
         'Content-Type': 'application/json'

@@ -21,17 +21,13 @@ webserver.set('views', './views/layouts');
 webserver.use(express.urlencoded({extended:true}));
 webserver.use(bodyParser.json());
 webserver.use(bodyParser.urlencoded({extended: true}));
-webserver.use(express.static(path.join(__dirname + '/public')));
+webserver.use(express.static(path.resolve(__dirname + '/views')));
 
 webserver.use(cors());
 
 const port = 3195;
 
 let votes;
-
-webserver.get('/', function(req, res) {
-    res.sendFile(__dirname + '/views/index.html');
-});
 
 webserver.get('/stat', function(req, res) {
     votes = require('./votes.json');
