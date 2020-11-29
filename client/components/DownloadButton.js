@@ -22,7 +22,8 @@ class DownloadButton extends React.PureComponent {
             fileFormat = 'application/' + this.props.btnName;
         }
 
-        let url = 'http://localhost:3195/download';
+        let url = 'http://46.101.125.193:3195/download';
+        // let url = 'http://localhost:3195/download';
 
         fetch(url, {
             method: 'POST',
