@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isoFetch from 'isomorphic-fetch';
-import {saveAs} from 'file-saver';
+import saveAs from 'file-saver';
 
 class DownloadButton extends React.PureComponent {
     static propTypes = {
