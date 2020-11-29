@@ -1,22 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const expressHbs = require('express-handlebars');
-const hbs = require('hbs');
+// const expressHbs = require('express-handlebars');
+// const hbs = require('hbs');
 const fs = require('fs');
 const webserver = express();
 const cors = require('cors');
-const { web } = require('webpack');
-const { send } = require('process');
+const {toXML} = require('jstoxml');
 
-webserver.engine('hbs', expressHbs({
-    layoutsDir: "views/layouts",
-    defaultLayout: 'index',
-    extname: 'hbs'
-}))
 
-webserver.set('view engine', 'hbs');
-webserver.set('views', './views/layouts');
+// let hb = expressHbs.create();
+
+// webserver.engine('.hbs', hb.engine);
+
+
+// webserver.set('view engine', '.hbs');
+webserver.set('views', './views');
 
 webserver.use(express.urlencoded({extended:true}));
 webserver.use(bodyParser.json());
@@ -27,10 +26,8 @@ webserver.use(cors());
 
 const port = 3195;
 
-let votes;
-
 webserver.get('/stat', function(req, res) {
-    votes = require('./votes.json');
+    let votes = require('./votes.json');
     // console.log(votes);
     res.json(votes);
 });
@@ -47,7 +44,49 @@ webserver.post('/vote', function(req, res) {
     apdateVotes(req.body);
 });
 
+webserver.post('/download', function(req, res) {
+    let votes = require('./votes.json');
+    console.log(votes);
+    console.log(req.headers.accept);
+    switch (req.headers.accept) {
+        case 'application/json':
+            console.log(req.headers.accept + ' is ready');
+            res.setHeader('Content-Disposition', 'attachment');
+            res.setHeader('Content-Type', req.headers.accept);
+            res.send(votes);
+            break;
+        case 'text/html':
+            console.log(req.headers.accept + ' is ready');
+            res.setHeader('Content-Disposition', 'attachment');
+            res.setHeader('Content-Type', req.headers.accept);
+            res.send(votes);
+            // let hb = expressHbs.create();
+            // hb.render('server/veiws/results.hbs', {
+            //     framework1: votes[0].framework,
+            //     vote1: votes[0].numVotes,
+            //     framework2: votes[1].framework,
+            //     vote2: votes[1].numVotes,
+            //     framework3: votes[2].framework,
+            //     vote3: votes[2].numVotes
+            // });
+            // .then((renderedHTML) => {
+            //     res.send({html: renderedHTML});
+            // });
+            // res.send(hb);
+            break;
+        case 'application/xml':
+            console.log(req.headers.accept + ' is ready');
+            res.setHeader('Content-Disposition', 'attachment');
+            res.setHeader('Content-Type', req.headers.accept);
+            res.send(toXML(votes));
+            break;
+        default:
+            console.log(req.headers.accept + ' is not found');
+    }
+});
+
 function apdateVotes(reqBody) {
+    let votes = require('./votes.json');
     for (let i = 0; i < 3; i++) {
         if (votes[i].code == parseInt(reqBody.code)) {
             console.log(votes[i].numVotes);
@@ -58,7 +97,7 @@ function apdateVotes(reqBody) {
 
     let data = JSON.stringify(votes, null, 2);
     console.log(data);
-    fs.writeFileSync('votes.json', data);
+    fs.writeFileSync('./server/votes.json', data);
 };
 
 webserver.listen(port, () => {

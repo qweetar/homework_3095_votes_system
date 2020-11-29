@@ -6,8 +6,8 @@
   "scripts": {
     "build": ".\\node_modules\\.bin\\webpack",
     "livebuild": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors",
-    "server3095:dev": "cross-env NODE_ENV=development node ./server/app3095.js",
-    "server3095:prod": "cross-env NODE_ENV=production node ./server/app3095.js",
+    "startdev": "cross-env NODE_ENV=development node ./server/app3095.js",
+    "startprod": "cross-env NODE_ENV=production node ./server/app3095.js",
     "servers": "nodemon servers/servers.js",
     "servers_filelog": "node servers/servers.js >> /home/nodeuser/NodeArch/_nodemon.log"
   },
@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
+    "file-saver": "^2.0.5",
     "hbs": "^4.1.1",
     "helmet": "^3.21.1",
     "ignore-styles": "^5.0.1",
@@ -36,6 +37,7 @@
     "jasmine-node": "^3.0.0",
     "jimp": "^0.16.1",
     "js-sha256": "^0.9.0",
+    "jstoxml": "^2.0.1",
     "mongodb": "^3.3.2",
     "mongoose": "^5.7.5",
     "multer": "^1.4.2",

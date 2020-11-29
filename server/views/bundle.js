@@ -115,6 +115,118 @@ _reactDom2.default.render(_react2.default.createElement(_VotesBlock2.default, nu
 
 /***/ }),
 
+/***/ "./client/components/DownloadButton.js":
+/*!*********************************************!*\
+  !*** ./client/components/DownloadButton.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _isomorphicFetch = __webpack_require__(/*! isomorphic-fetch */ "./node_modules/isomorphic-fetch/fetch-npm-browserify.js");
+
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+var _fileSaver = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var DownloadButton = function (_React$PureComponent) {
+    _inherits(DownloadButton, _React$PureComponent);
+
+    function DownloadButton() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, DownloadButton);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DownloadButton.__proto__ || Object.getPrototypeOf(DownloadButton)).call.apply(_ref, [this].concat(args))), _this), _this.handleSubmit = function (event) {
+            event.preventDefault();
+            var fileFormat = void 0;
+            if (_this.props.btnName == 'html') {
+                fileFormat = 'text/' + _this.props.btnName;
+            } else {
+                fileFormat = 'application/' + _this.props.btnName;
+            }
+
+            var url = 'http://localhost:3195/download';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': fileFormat
+                }
+            }).then(function (response) {
+                return response.blob();
+            }).then(function (blob) {
+                (0, _fileSaver.saveAs)(blob);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    // state = {
+    //     acceptFormat: 'application/' + this.props.btnName,
+    // };
+
+
+    _createClass(DownloadButton, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'li',
+                { style: { display: 'inline', margin: '5px' } },
+                _react2.default.createElement(
+                    'form',
+                    { onSubmit: this.handleSubmit },
+                    _react2.default.createElement(
+                        'button',
+                        { type: 'submit' },
+                        this.props.btnName
+                    )
+                )
+            );
+        }
+    }]);
+
+    return DownloadButton;
+}(_react2.default.PureComponent);
+
+DownloadButton.propTypes = {
+    btnName: _propTypes2.default.string.isRequired
+};
+exports.default = DownloadButton;
+
+/***/ }),
+
 /***/ "./client/components/Question.js":
 /*!***************************************!*\
   !*** ./client/components/Question.js ***!
@@ -193,6 +305,120 @@ exports.default = Question;
 
 /***/ }),
 
+/***/ "./client/components/ResultBlock.js":
+/*!******************************************!*\
+  !*** ./client/components/ResultBlock.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _Votes = __webpack_require__(/*! ./Votes */ "./client/components/Votes.js");
+
+var _Votes2 = _interopRequireDefault(_Votes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ResultBlock = function (_React$PureComponent) {
+  _inherits(ResultBlock, _React$PureComponent);
+
+  function ResultBlock() {
+    _classCallCheck(this, ResultBlock);
+
+    return _possibleConstructorReturn(this, (ResultBlock.__proto__ || Object.getPrototypeOf(ResultBlock)).apply(this, arguments));
+  }
+
+  _createClass(ResultBlock, [{
+    key: 'render',
+    value: function render() {
+      var votesCode = this.props.votes.map(function (vote) {
+        return _react2.default.createElement(_Votes2.default, { key: vote.code, vote: vote });
+      });
+
+      return _react2.default.createElement(
+        'table',
+        { border: '1px solid black' },
+        _react2.default.createElement(
+          'thead',
+          null,
+          _react2.default.createElement(
+            'tr',
+            null,
+            _react2.default.createElement(
+              'th',
+              null,
+              '\u0424\u0440\u0435\u0439\u043C\u0432\u043E\u0440\u043A'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'React'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Angular'
+            ),
+            _react2.default.createElement(
+              'th',
+              null,
+              'Vue'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'tbody',
+          null,
+          _react2.default.createElement(
+            'tr',
+            null,
+            _react2.default.createElement(
+              'td',
+              null,
+              '\u041A\u043E\u043B-\u0432\u043E \u0433\u043E\u043B\u043E\u0441\u043E\u0432'
+            ),
+            votesCode
+          )
+        )
+      );
+    }
+  }]);
+
+  return ResultBlock;
+}(_react2.default.PureComponent);
+
+ResultBlock.propTypes = {
+  votes: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+    code: _propTypes2.default.number.isRequired,
+    numVotes: _propTypes2.default.number.isRequired
+  }))
+};
+exports.default = ResultBlock;
+
+/***/ }),
+
 /***/ "./client/components/Votes.js":
 /*!************************************!*\
   !*** ./client/components/Votes.js ***!
@@ -238,11 +464,8 @@ var Votes = function (_React$PureComponent) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'li',
+                'td',
                 null,
-                '\u041A\u043E\u043B-\u0432\u043E \u0433\u043E\u043B\u043E\u0441\u043E\u0432 \u0437\u0430 ',
-                this.props.vote.framework,
-                ': ',
                 this.props.vote.numVotes
             );
         }
@@ -254,7 +477,6 @@ var Votes = function (_React$PureComponent) {
 Votes.propTypes = {
     vote: _propTypes2.default.shape({
         code: _propTypes2.default.number.isRequired,
-        framework: _propTypes2.default.string.isRequired,
         numVotes: _propTypes2.default.number.isRequired
     })
 };
@@ -286,13 +508,17 @@ var _isomorphicFetch = __webpack_require__(/*! isomorphic-fetch */ "./node_modul
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-var _Votes = __webpack_require__(/*! ./Votes */ "./client/components/Votes.js");
+var _ResultBlock = __webpack_require__(/*! ./ResultBlock */ "./client/components/ResultBlock.js");
 
-var _Votes2 = _interopRequireDefault(_Votes);
+var _ResultBlock2 = _interopRequireDefault(_ResultBlock);
 
 var _Question = __webpack_require__(/*! ./Question */ "./client/components/Question.js");
 
 var _Question2 = _interopRequireDefault(_Question);
+
+var _DownloadButton = __webpack_require__(/*! ./DownloadButton */ "./client/components/DownloadButton.js");
+
+var _DownloadButton2 = _interopRequireDefault(_DownloadButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -311,10 +537,11 @@ var VotesBlock = function (_React$PureComponent) {
     var _this = _possibleConstructorReturn(this, (VotesBlock.__proto__ || Object.getPrototypeOf(VotesBlock)).call(this, props));
 
     _this.state = {
-      dataReady: false,
+      questionsReady: false,
+      chosenVote: false,
+      questions: [],
       voteResult: [],
-      chosenVote: null,
-      questions: []
+      votesReady: false
     };
 
     _this.fetchError = function (errorMessage) {
@@ -324,12 +551,12 @@ var VotesBlock = function (_React$PureComponent) {
     _this.fetchSuccess = function (loadedData) {
       console.log(loadedData);
       _this.setState({
-        dataReady: true,
+        votesReady: true,
         voteResult: loadedData
       });
     };
 
-    _this.loadData = function () {
+    _this.loadVotes = function () {
       // isoFetch("http://46.101.125.193:3195/stat", {
       (0, _isomorphicFetch2.default)("http://localhost:3195/stat", {
         method: "get",
@@ -352,6 +579,7 @@ var VotesBlock = function (_React$PureComponent) {
     _this.fetchQuestionSuccess = function (loadedData) {
       console.log(loadedData);
       _this.setState({
+        questionsReady: true,
         questions: loadedData
       });
     };
@@ -377,8 +605,7 @@ var VotesBlock = function (_React$PureComponent) {
     };
 
     _this.fetchSubminSuccess = function () {
-      _this.loadData();
-      // this.loadQuestions();
+      _this.loadVotes();
     };
 
     _this.handleSubmit = function (value) {
@@ -407,7 +634,7 @@ var VotesBlock = function (_React$PureComponent) {
   _createClass(VotesBlock, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.loadData();
+      this.loadVotes();
       this.loadQuestions();
     }
   }, {
@@ -415,7 +642,9 @@ var VotesBlock = function (_React$PureComponent) {
     value: function render() {
       var _this2 = this;
 
-      if (!this.state.dataReady) {
+      console.log("component update");
+      console.log(this.state.voteResult);
+      if (!this.state.votesReady) {
         return _react2.default.createElement(
           "div",
           null,
@@ -423,8 +652,8 @@ var VotesBlock = function (_React$PureComponent) {
         );
       };
 
-      var votesCode = this.state.voteResult.map(function (vote) {
-        return _react2.default.createElement(_Votes2.default, { key: vote.code, vote: vote });
+      var resultCode = _react2.default.createElement(_ResultBlock2.default, {
+        votes: this.state.voteResult
       });
 
       var questionsCode = this.state.questions.map(function (question) {
@@ -434,6 +663,11 @@ var VotesBlock = function (_React$PureComponent) {
           cbHandleSubmit: _this2.handleSubmit
         });
       });
+
+      var jsonBtn = _react2.default.createElement(_DownloadButton2.default, { btnName: 'json' });
+      var htmlBtn = _react2.default.createElement(_DownloadButton2.default, { btnName: 'html' });
+      var xmlBtn = _react2.default.createElement(_DownloadButton2.default, { btnName: 'xml' });
+      console.log("end");
 
       return _react2.default.createElement(
         "div",
@@ -461,10 +695,22 @@ var VotesBlock = function (_React$PureComponent) {
             null,
             "\u0420\u0435\u0439\u0442\u0438\u043D\u0433 \u043D\u0430\u0440\u043E\u0434\u043D\u043E\u0433\u043E \u0433\u043E\u043B\u043E\u0441\u043E\u0432\u0430\u043D\u0438\u044F"
           ),
+          resultCode
+        ),
+        _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(
+            "h3",
+            null,
+            "\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u0433\u043E\u043B\u043E\u0441\u043E\u0432\u0430\u043D\u0438\u044F"
+          ),
           _react2.default.createElement(
             "ul",
-            null,
-            votesCode
+            { type: "none" },
+            jsonBtn,
+            htmlBtn,
+            xmlBtn
           )
         )
       );
@@ -475,6 +721,23 @@ var VotesBlock = function (_React$PureComponent) {
 }(_react2.default.PureComponent);
 
 exports.default = VotesBlock;
+
+/***/ }),
+
+/***/ "./node_modules/file-saver/dist/FileSaver.min.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/file-saver/dist/FileSaver.min.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(a,b){if(true)!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (b),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else {}})(this,function(){"use strict";function b(a,b){return"undefined"==typeof b?b={autoBom:!1}:"object"!=typeof b&&(console.warn("Deprecated: Expected third argument to be a object"),b={autoBom:!b}),b.autoBom&&/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(a.type)?new Blob(["\uFEFF",a],{type:a.type}):a}function c(a,b,c){var d=new XMLHttpRequest;d.open("GET",a),d.responseType="blob",d.onload=function(){g(d.response,b,c)},d.onerror=function(){console.error("could not download file")},d.send()}function d(a){var b=new XMLHttpRequest;b.open("HEAD",a,!1);try{b.send()}catch(a){}return 200<=b.status&&299>=b.status}function e(a){try{a.dispatchEvent(new MouseEvent("click"))}catch(c){var b=document.createEvent("MouseEvents");b.initMouseEvent("click",!0,!0,window,0,0,0,80,20,!1,!1,!1,!1,0,null),a.dispatchEvent(b)}}var f="object"==typeof window&&window.window===window?window:"object"==typeof self&&self.self===self?self:"object"==typeof global&&global.global===global?global:void 0,a=f.navigator&&/Macintosh/.test(navigator.userAgent)&&/AppleWebKit/.test(navigator.userAgent)&&!/Safari/.test(navigator.userAgent),g=f.saveAs||("object"!=typeof window||window!==f?function(){}:"download"in HTMLAnchorElement.prototype&&!a?function(b,g,h){var i=f.URL||f.webkitURL,j=document.createElement("a");g=g||b.name||"download",j.download=g,j.rel="noopener","string"==typeof b?(j.href=b,j.origin===location.origin?e(j):d(j.href)?c(b,g,h):e(j,j.target="_blank")):(j.href=i.createObjectURL(b),setTimeout(function(){i.revokeObjectURL(j.href)},4E4),setTimeout(function(){e(j)},0))}:"msSaveOrOpenBlob"in navigator?function(f,g,h){if(g=g||f.name||"download","string"!=typeof f)navigator.msSaveOrOpenBlob(b(f,h),g);else if(d(f))c(f,g,h);else{var i=document.createElement("a");i.href=f,i.target="_blank",setTimeout(function(){e(i)})}}:function(b,d,e,g){if(g=g||open("","_blank"),g&&(g.document.title=g.document.body.innerText="downloading..."),"string"==typeof b)return c(b,d,e);var h="application/octet-stream"===b.type,i=/constructor/i.test(f.HTMLElement)||f.safari,j=/CriOS\/[\d]+/.test(navigator.userAgent);if((j||h&&i||a)&&"undefined"!=typeof FileReader){var k=new FileReader;k.onloadend=function(){var a=k.result;a=j?a:a.replace(/^data:[^;]*;/,"data:attachment/file;"),g?g.location.href=a:location=a,g=null},k.readAsDataURL(b)}else{var l=f.URL||f.webkitURL,m=l.createObjectURL(b);g?g.location=m:location.href=m,g=null,setTimeout(function(){l.revokeObjectURL(m)},4E4)}});f.saveAs=g.saveAs=g, true&&(module.exports=g)});
+
+//# sourceMappingURL=FileSaver.min.js.map
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -29845,6 +30108,37 @@ if (false) {} else {
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),

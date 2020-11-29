@@ -1,7 +1,8 @@
 import React from "react";
 import isoFetch from "isomorphic-fetch";
-import Votes from './Votes';
+import ResultBlock from './ResultBlock';
 import Question from "./Question";
+import DownloadButton from './DownloadButton';
 
 class VotesBlock extends React.PureComponent {
   constructor(props) {
@@ -9,15 +10,16 @@ class VotesBlock extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.loadData();
+    this.loadVotes();
     this.loadQuestions();
   }
 
   state = {
-    dataReady: false,
-    voteResult: [],
-    chosenVote: null,
+    questionsReady: false,
+    chosenVote: false,
     questions: [],
+    voteResult: [],
+    votesReady: false,
   };
 
   fetchError = (errorMessage) => {
@@ -27,14 +29,14 @@ class VotesBlock extends React.PureComponent {
   fetchSuccess = (loadedData) => {
     console.log(loadedData);
     this.setState({
-      dataReady: true,
+      votesReady: true,
       voteResult: loadedData,
     });
   };
 
-  loadData = () => {
-    isoFetch("http://46.101.125.193:3195/stat", {
-    // isoFetch("http://localhost:3195/stat", {
+  loadVotes = () => {
+    // isoFetch("http://46.101.125.193:3195/stat", {
+    isoFetch("http://localhost:3195/stat", {
       method: "get",
       headers: {
         "Accept": "application/json",
@@ -55,16 +57,18 @@ class VotesBlock extends React.PureComponent {
       });
   };
 
+
   fetchQuestionSuccess = (loadedData) => {
     console.log(loadedData);
     this.setState({
+      questionsReady: true,
       questions: loadedData,
     });
   };
 
   loadQuestions = () => {
-    isoFetch("http://46.101.125.193:3195/variants", {
-    // isoFetch("http://localhost:3195/variants", {
+    // isoFetch("http://46.101.125.193:3195/variants", {
+    isoFetch("http://localhost:3195/variants", {
       method: "post",
       headers: {
         "Accept": "application/json",
@@ -86,13 +90,13 @@ class VotesBlock extends React.PureComponent {
   };
 
   fetchSubminSuccess = () => {
-    this.loadData();
+    this.loadVotes();
   }
 
   handleSubmit = (value) => {
     console.log(value);
-    isoFetch("http://46.101.125.193:3195/vote", {
-    // isoFetch("http://localhost:3195/vote", {
+    // isoFetch("http://46.101.125.193:3195/vote", {
+    isoFetch("http://localhost:3195/vote", {
       method: "post",
       headers: {
         'Content-Type': 'application/json'
@@ -114,13 +118,15 @@ class VotesBlock extends React.PureComponent {
     };
 
   render() {
-      if (!this.state.dataReady) {
+    console.log("component update");
+    console.log(this.state.voteResult);
+      if (!this.state.votesReady) {
         return <div>загрузка данных...</div>
       };
 
-      let votesCode = this.state.voteResult.map( vote => 
-            <Votes key={vote.code} vote={vote} />
-        );
+      let resultCode = <ResultBlock
+        votes={this.state.voteResult}
+        />;
 
       let questionsCode = this.state.questions.map(question => 
           <Question 
@@ -129,6 +135,11 @@ class VotesBlock extends React.PureComponent {
           cbHandleSubmit={this.handleSubmit}
           />
         );
+
+      let jsonBtn  = <DownloadButton btnName={'json'} />;
+      let htmlBtn  = <DownloadButton btnName={'html'}/>;
+      let xmlBtn  = <DownloadButton btnName={'xml'}/>;
+      console.log("end");
 
     return (
       <div>
@@ -139,8 +150,25 @@ class VotesBlock extends React.PureComponent {
         </div>
         <div>
           <h3>Рейтинг народного голосования</h3>
-          <ul>
-          {votesCode}
+          {/* <table>
+            <thead>
+              <tr>
+                <th>React</th>
+                <th>Angular</th>
+                <th>Vue</th>
+              </tr>
+            </thead>
+            <tbody> */}
+          {resultCode}
+          {/* </tbody>
+          </table> */}
+        </div>
+        <div>
+          <h3>Скачать результаты голосования</h3>
+          <ul type='none'>
+          {jsonBtn}
+          {htmlBtn}
+          {xmlBtn}
           </ul>
         </div>
       </div>
